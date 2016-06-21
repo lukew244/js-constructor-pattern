@@ -6,6 +6,12 @@ At a high level, this week is about building an effective process for learning u
 
 You'll also write some code that uses this pattern to encapsulate behaviour.
 
+### Learning objectives
+
+1. Describe what a constructor function does.  Describe what a constructor function's prototype does.
+2. Write a constructor function and prototype to encapsulate some behaviour.
+3. Explain the strengths and weaknesses of the constructor and prototype pattern as a way to encapsulate behaviour.
+
 ### Getting visibility
 
 A great way to understand code is to first tighten the loop, then get visibility.  In this workshop, we'll practice getting visibility.  As you go through the workshop, use `console.log()` to inspect the values of:
@@ -20,7 +26,11 @@ A great way to understand code is to first tighten the loop, then get visibility
 
 * Clone this repo.
 
-* Open the `index.html` file in your web browser.  Open the browser console.  You should see `hello!`.
+* Open the `index.html` file in your web browser.
+
+* Open the browser console.
+
+* You should see `hello!`.
 
 * Open `index.js` in your text editor.
 
@@ -45,13 +55,17 @@ We'll come back together for a short plenary.  We'll show our code and discuss i
 ### Question 1
 
 ```js
-// What happens if you rename CountModel to countmodel? What ramifications does this have?
+// What happens if you rename CountModel to countmodel? Does this have any ramifications?
 
 function CountModel() {
   this._count = 0;
 };
 
 CountModel.prototype = {
+  count: function() {
+    return this._count;
+  },
+
   set: function(count) {
     this._count = count;
   }
@@ -70,6 +84,10 @@ function CountModel() {
 };
 
 CountModel.prototype = {
+  count: function() {
+    return this._count;
+  },
+
   // What happens if you rename `set` to `_set` (and change
   // `countModel.set(5)` below to `countModel._set(5)`)?
   set: function(count) {
@@ -88,12 +106,15 @@ console.log("count is", countModel.count());
 function CountModel() {
   this._count = 0;
 
-  // What happens if you assign `this` to a different value?
-
-  // What happens if you add `return {}` on this line. Why?
+  // What happens if you uncomment the line below. Why does this happen?
+  // return {};
 };
 
 CountModel.prototype = {
+  count: function() {
+    return this._count;
+  },
+
   set: function(count) {
     this._count = count;
   }
@@ -112,12 +133,16 @@ function CountModel() {
 };
 
 CountModel.prototype = {
+  count: function() {
+    return this._count;
+  },
+
   set: function(count) {
     this._count = count;
   }
 };
 
-// What happens if you omit the `new` keyword in the next line?
+// What happens if you omit the `new` keyword in the next line? Why?
 var countModel = new CountModel();
 countModel.set(5);
 console.log("count is", countModel.count());
@@ -131,18 +156,23 @@ function CountModel() {
 };
 
 CountModel.prototype = {
+  count: function() {
+    return this._count;
+  },
+
   set: function(count) {
     this._count = count;
   }
 };
 
 var countModel = new CountModel();
-countModel.set(5);
 
 // What happens if you add this code? Why?
 // countModel.set = function() {
 //   return "hello";
 // };
+
+countModel.set(5);
 
 console.log("count is", countModel.count());
 ```
@@ -155,6 +185,10 @@ function CountModel() {
 };
 
 CountModel.prototype = {
+  count: function() {
+    return this._count;
+  },
+
   set: function(count) {
     this._count = count;
   }
